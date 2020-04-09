@@ -29,9 +29,14 @@ public class Doctor {
 		return pList;
 	}
 
-	public void assignPatient(Patient patient) {
+	public void assignPatient(Patient patient) throws Exception {
 		// TODO Auto-generated method stub
-		pList.add(patient);
+		if(pList.size() < 3) {
+			pList.add(patient);
+		}
+		else {
+			throw new DoctorFullException();
+		}
 	}
 
 	public void doMedicine() {

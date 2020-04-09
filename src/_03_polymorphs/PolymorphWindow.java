@@ -16,13 +16,13 @@ import javax.swing.Timer;
 
 import sun.java2d.Disposer.PollDisposable;
 
-public class PolymorphWindow extends JPanel implements ActionListener, MouseMotionListener {
+public class PolymorphWindow extends JPanel implements ActionListener, MouseMotionListener, MouseListener {
 	public static final int WIDTH = 900;
 	public static final int HEIGHT = 600;
 
 	public static int mouseX;
 	public static  int mouseY;
-	
+	public static boolean pressed;
 	
 	private JFrame window;
 	private Timer timer;
@@ -46,6 +46,8 @@ public class PolymorphWindow extends JPanel implements ActionListener, MouseMoti
 		window.pack();
 		window.setVisible(true);
 		addMouseMotionListener(this);   
+		addMouseListener(this);
+
 //   	 bluePoly = new BluePolymorph(50, 50);
 //   	 redPoly = new RedMorph(50, 50);
 //   	movePoly = new MovingMorph(50,50);
@@ -54,8 +56,13 @@ public class PolymorphWindow extends JPanel implements ActionListener, MouseMoti
 		//pMorphs.add(new MovingMorph(50, 50));
 		pMorphs.add(new MouseMorph(50,50));
 		pMorphs.add(new ImgPoly(50, 50));
+		pMorphs.add(new SquarePolly(50, 50));
+		
+		pMorphs.add(new JOPMorph(100, 50));
+
 		timer = new Timer(1000 / 30, this);
 		timer.start();
+		
 	}
 
 	public void paintComponent(Graphics g) {
@@ -81,6 +88,7 @@ public class PolymorphWindow extends JPanel implements ActionListener, MouseMoti
 //   	 redPoly.update();
 //   	 
 //   	 movePoly.update();
+
 		for (int i = 0; i < pMorphs.size(); i++) {
 			pMorphs.get(i).update();
 		}
@@ -100,5 +108,35 @@ public class PolymorphWindow extends JPanel implements ActionListener, MouseMoti
 		// TODO Auto-generated method stub
 		mouseX = e.getX();
 		mouseY = e.getY();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		pressed = true;
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
